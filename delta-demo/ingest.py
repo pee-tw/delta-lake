@@ -1,11 +1,9 @@
 import dload
 
 import shutil
-from pyspark.sql.functions import input_file_name
 from pyspark.sql.functions import year
 
 from delta import *
-import pyspark
 from pyspark.sql import SparkSession
 
 delta_spark_version = "2.1.0"
@@ -33,8 +31,8 @@ spark = (
 
 from pyspark.sql.types import (
     StructType,
-    StringType,
     IntegerType,
+    LongType,
     DoubleType,
     BooleanType,
 )
@@ -46,7 +44,7 @@ schema = (
     .add("price", DoubleType(), True)
     .add("qty", DoubleType(), True)
     .add("quoteQty", DoubleType(), True)
-    .add("time", IntegerType(), True)
+    .add("time", LongType(), True)
     .add("isBuyerMaker", BooleanType(), True)
     .add("isBestMatch", BooleanType(), True)
 )
@@ -61,7 +59,7 @@ def daterange(start_date, end_date):
         yield start_date + timedelta(n)
 
 # start_date = date(2021, 2, 28)
-start_date = date(2021, 4, 1)
+start_date = date(2021, 3, 14)
 end_date = date(2022, 10, 10)
 
 for single_date in daterange(start_date, end_date):
