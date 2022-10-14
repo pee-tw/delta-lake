@@ -12,10 +12,8 @@ spark_jars_packages = f"io.delta:delta-core_2.12:{delta_spark_version}"
 spark = (
     SparkSession.builder.master("local[*]")
     .appName("PySparkLocal")
-    .config("spark.executor.memory", "4g")
+    .config("spark.executor.memory", "2g")
     .config("spark.driver.memory", "2g")
-    .config("spark.memory.offHeap.enabled", True)
-    .config("spark.memory.offHeap.size", "8g")
     .config("spark.jars.packages", spark_jars_packages)
     .config("spark.sql.sources.partitionOverwriteMode", "dynamic")
     .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension")
